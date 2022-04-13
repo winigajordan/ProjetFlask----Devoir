@@ -2,6 +2,7 @@ from ast import ExceptHandler
 from models.compte import *
 from datetime import datetime
 import hashlib
+import re
 
 
 def addAccount(form):
@@ -38,7 +39,11 @@ def changeAcountStatus(id):
 def searchAccount(num):
     accounts = Compte.query.all()
     result = []
+    print(num)
+    num = num.replace(" ", "")
+    print(num)
     for i in accounts:
-        if num in i.code:
+        if num in i.numero_compte:
             result.append(i)
+    
     return result

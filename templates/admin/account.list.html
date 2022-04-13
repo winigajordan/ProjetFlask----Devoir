@@ -7,15 +7,15 @@
 <div class = "jumotron">
 
     <div class = "row">
-        <div class = "col-4">
+        <div class = "col-8">
             <h2 class="fw-bold mb-4">Liste des comptes</h2>
         </div>
         <div class = "col-4">
-            <form action = "POST">
+            <form method="post">
                 {{ form.hidden_tag() }}
-                <div class="form-group col-7">
+                <div class="form-group ">
                 {{ form.num (class = "form-control ") }}
-                {{ form.submit (class = "btn btn-primary mt-1") }}
+                {{ form.submit (class = "btn btn-primary mt-2") }}
                  </div>
             </form>
         </div>

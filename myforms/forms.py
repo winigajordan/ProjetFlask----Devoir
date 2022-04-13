@@ -10,5 +10,5 @@ class AccountCreationForm(FlaskForm):
     submit = SubmitField("Ajouter un compte")
 
 class SearchAccount(FlaskForm):
-    num = StringField("Numero de compte", validators=[DataRequired()])
+    num = StringField( validators=[DataRequired()])
     submit = SubmitField("Search Account")

@@ -18,20 +18,23 @@ def account_add():
     return render_template("./admin/account.add.html", form = form)
 
 
-@dash.route("/admin/account/list", methods = ["GET","POST"], defaults = {"id":None})
-@dash.route("/admin/account/found/<id>", methods = ["GET","POST"])
-def account_list(id):
+@dash.route("/admin/account/list", methods = ["POST","GET"], defaults = {"num":None})
+@dash.route("/admin/account/search/<int:num>", methods = ["GET","POST"])
+def account_list(num):
     form = SearchAccount()
-    
+    data = listAccount()
     if form.validate_on_submit():
         num = form.num.data
-        result = searchAccount(num)
-        return render_template("./admin/account.list.html",accounts = result, form = form )
-    return render_template("./admin/account.list.html", accounts = listAccount(), form = form)
+        data = searchAccount(num)
+        flash(num)
+        #return redirect(url_for("dash.account_list", num = num))
+        return render_template("./admin/account.list.html",accounts =  data, form = form )
+    return render_template("./admin/account.list.html", accounts = data, form = form)
 
 @dash.route("/admin/account/update/<int:id>")
 def account_update(id):
     msg = changeAcountStatus(id)
     flash(msg)
     return redirect(url_for("dash.account_list"))
+
 

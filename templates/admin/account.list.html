@@ -5,7 +5,22 @@
 {% block content %}
 
 <div class = "jumotron">
-    <p>
+
+    <div class = "row">
+        <div class = "col-4">
+            <h2 class="fw-bold mb-4">Liste des comptes</h2>
+        </div>
+        <div class = "col-4">
+            <form action = "POST">
+                {{ form.hidden_tag() }}
+                <div class="form-group col-7">
+                {{ form.num (class = "form-control ") }}
+                {{ form.submit (class = "btn btn-primary mt-1") }}
+                 </div>
+            </form>
+        </div>
+    </div>
+
         <table class="table table-striped">
             <thead class = "thead-dark">
                 <tr>
@@ -18,24 +33,34 @@
                 </tr>
             </thead>
             <tbody>
-                
+                {% for account in accounts %}
                 <tr>
-                    <td scope="row">Nom </td>
-                    <td>Prenom</td>
-                    <td>Age</td>
-                    <td>Mail</td>
-                    <td>Etat</td>
+                    <td scope="row">{{account.numero_compte}} </td>
+                    <td>{{account.nom_client}}</td>
+                    <td>{{account.numero_telephone}}</td>
+                    <td>{{account.solde}}</td>
+                    <td>{{"Actif" if account.etat == "1" else "Bloqué"}}</td>
                     <td class = "">
-                        <a class="btn btn-sm btn-outline-primary" href="#">Edit</a> |
-                        <a class="btn btn-sm btn-outline-warning" href="#">Delete</a>
+                        {% if account.etat == "1" %}
+                        <a class="btn btn-sm btn-outline-danger" href="{{ url_for('dash.account_update', id = account.id) }}">Bloquer</a>
+                        {% else %}
+                        <a class="btn btn-sm btn-outline-info" href="{{ url_for('dash.account_update', id = account.id) }}">Activer</a>
+                        {% endif %}
                         <a></a>
                     </td>
                 </tr>
-               
-                
+                {% endfor %}
             </tbody>
         </table>
-    </p>
+        {% for msg in get_flashed_messages() %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong> Msg Flash</strong> {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+         {% endfor %}
+    
 </div>
 
 {% endblock content %}

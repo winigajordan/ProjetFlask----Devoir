@@ -21,6 +21,24 @@ def addAccount(form):
        return False
 
 
+def listAccount():
+    return Compte.query.all()
 
 
+def changeAcountStatus(id):
+    account = Compte.query.get(int(id))
+    if account.etat == "1":
+        account.etat = "0"
+    else:
+        account.etat =  "1"
+    db.session.add(account)
+    db.session.commit()
+    return account.etat
 
+def searchAccount(num):
+    accounts = Compte.query.all()
+    result = []
+    for i in accounts:
+        if num in i.code:
+            result.append(i)
+    return result

@@ -8,3 +8,7 @@ class AccountCreationForm(FlaskForm):
     telephone = StringField("Contact du client", validators=[DataRequired()])
     etat = SelectField("Etat du compte", choices=[('0', 'Bloqué'), ('1', 'Actif')] ,validators=[DataRequired()])
     submit = SubmitField("Ajouter un compte")
+
+class SearchAccount(FlaskForm):
+    num = StringField("Numero de compte", validators=[DataRequired()])
+    submit = SubmitField("Search Account")

@@ -53,14 +53,14 @@
             <li class="nav-item dropdown">
 
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   Inconnu
+                  {{ session.get("user_name") if session.get("user_name")  else "Inconnu" }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Profil</a>
+                    <a class="dropdown-item" href="#">Admin</a>
                     <div class = "dropdown-divider" ></div>
                     <a class="dropdown-item text-danger" href="#">Logout</a>
-                    <a class="dropdown-item text-primary" href="#">Login</a>
-                    <a class="dropdown-item text-primary" href="#">Register</a>
+                    
+                   
                 </div>
               </li>
         </ul>

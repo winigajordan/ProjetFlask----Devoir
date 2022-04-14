@@ -2,6 +2,8 @@ from ast import ExceptHandler
 from models.compte import *
 from datetime import datetime
 import hashlib
+
+
 import re
 
 
@@ -47,3 +49,17 @@ def searchAccount(num):
             result.append(i)
     
     return result
+
+def addAdmin(form):
+    try:
+        nom = form.nom.data
+        prenom = form.prenom.data
+        login = form.login.data
+        password = form.password1.data
+        pwd = hashlib.md5(password.encode('utf-8')).hexdigest()
+        admin = Admin(nom, prenom, login, pwd)
+        db.session.add(admin)
+        db.session.commit()
+        return True
+    except:
+        return False

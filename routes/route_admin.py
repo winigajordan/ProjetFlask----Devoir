@@ -1,6 +1,7 @@
+from multiprocessing.connection import answer_challenge
 from flask import flash, redirect, render_template, Blueprint, url_for
-from myforms.forms import AccountCreationForm, SearchAccount
-from controllers.admin_controller import addAccount, listAccount, changeAcountStatus, searchAccount
+from myforms.forms import AccountCreationForm, SearchAccount, AdminCreation
+from controllers.admin_controller import addAccount, listAccount, changeAcountStatus, searchAccount, addAdmin
 
 dash = Blueprint("dash", __name__)
 
@@ -34,7 +35,17 @@ def account_list(num):
 @dash.route("/admin/account/update/<int:id>")
 def account_update(id):
     msg = changeAcountStatus(id)
-    flash(msg)
     return redirect(url_for("dash.account_list"))
 
 
+@dash.route("/admin/admin/add" , methods = ["POST","GET"])
+def admin_add():
+    form = AdminCreation()
+    if form.validate_on_submit():
+        answer = addAdmin(form)
+        if not answer:
+            flash("Echec de creation du compte Admin")
+        else:
+            flash("Creation du compte Admin effectué")
+            
+    return render_template("./admin/admin.add.html", form = form)

@@ -1,0 +1,53 @@
+{% extends './admin/base.html' %}
+{% block title %} Add Admin {% endblock title %}
+{% block content %}
+<div class = "jumbotron">
+
+    <h1>
+    Ajouter un admin
+    </h1>
+
+    {% for msg in get_flashed_messages() %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong> Recherche de compte </strong> contenant {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+
+    <form method="post">
+        {{ form.hidden_tag() }}
+        <div class = "col-sm-4 offset-4">
+            <div class="form-group">
+                {{form.nom.label}}
+                {{ form.nom (class = "form-control") }}
+            </div>
+            <div class="form-group">
+                {{form.prenom.label}}
+                {{ form.prenom (class = "form-control") }}
+            </div>
+            <div class="form-group">
+                {{form.login.label}}
+                {{ form.login (class = "form-control") }}
+            </div>
+            <div class="form-group">
+                {{form.password1.label}}
+                {{ form.password1 (class = "form-control") }}
+            </div>
+            <div class="form-group">
+                {{form.password2.label}}
+                {{ form.password2 (class = "form-control") }}
+            </div>
+            
+            <div class="form-group">
+                {{ form.submit (class = "btn btn-primary mt-5") }}
+            </div>
+
+            
+
+        </div>
+    </form>
+ 
+</div>
+{% endblock content %}

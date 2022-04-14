@@ -20,7 +20,14 @@
             </form>
         </div>
     </div>
-
+    {% for msg in get_flashed_messages() %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong> Recherche de compte </strong> contenant {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
         <table class="table table-striped">
             <thead class = "thead-dark">
                 <tr>
@@ -52,14 +59,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        {% for msg in get_flashed_messages() %}
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong> Msg Flash</strong> {{ msg }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-         {% endfor %}
+        
     
 </div>
 
